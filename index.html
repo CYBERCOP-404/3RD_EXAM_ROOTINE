@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>পরীক্ষার রুটিন</title>
+  <meta name="viewport" content="width=device-width, initial-scale=2.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Noto Sans Bengali', 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #fce4ec, #e1f5fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .routine-box {
+      background: #ffffff;
+      padding: 30px 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 1100px;
+      position: relative;
+      overflow-x: auto;
+      transition: all 0.3s ease-in-out;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #222;
+      font-size: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 18px;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 14px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #1e88e5;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f1f8e9;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #e3f2fd;
+    }
+
+    .highlight-10am td:nth-child(2) {
+      background-color: #c8e6c9 !important;
+      font-weight: bold;
+    }
+
+    .highlight-2pm td:nth-child(2) {
+      background-color: #b8e2a7 !important;
+      font-weight: bold;
+    }
+
+    /* Download Button */
+    .download-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #26a69a, #66bb6a);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.2s, background 0.3s;
+      z-index: 10;
+    }
+
+    .download-btn:hover {
+      background: linear-gradient(135deg, #00796b, #43a047);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      table {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .download-btn {
+        font-size: 14px;
+        padding: 10px 18px;
+        top: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="routine" class="routine-box">
+  <button class="download-btn" onclick="downloadRoutine()">⬇ ডাউনলোড</button>
+  <h1>📘 পরীক্ষার রুটিন</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>তারিখ</th>
+        <th>সময়</th>
+        <th>বিষয়</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="highlight-10am"><td>১০-০৭-২৫</td><td>১০:০০ AM</td><td>ডিজিটাল ইলেকট্রনিক্স ১</td></tr>
+      <tr class="highlight-2pm"><td>১৩-০৭-২৫</td><td>২:০০ PM</td><td>ফিজিক্স‑২</td></tr>
+      <tr class="highlight-10am"><td>১৫-০৭-২৫</td><td>১০:০০ AM</td><td>পাইথন‑২</td></tr>
+      <tr class="highlight-2pm"><td>১৯-০৭-২৫</td><td>২:০০ PM</td><td>বেসিক ইলেকট্রনিক্স</td></tr>
+      <tr class="highlight-10am"><td>২১-০৭-২৫</td><td>১০:০০ AM</td><td>গণিত‑৩</td></tr>
+      <tr class="highlight-2pm"><td>২৩-০৭-২৫</td><td>২:০০ PM</td><td>গণিত‑২</td></tr>
+      <tr class="highlight-10am"><td>২৪-০৭-২৫</td><td>১০:০০ AM</td><td>আইটি সাপোর্ট সার্ভিসেস</td></tr>
+      <tr class="highlight-2pm"><td>০৭-০৮-২৫</td><td>২:০০ PM</td><td>সোশ্যাল সায়েন্স</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+  function downloadRoutine() {
+    const routine = document.getElementById('routine');
+    const btn = document.querySelector('.download-btn');
+    btn.textContent = "📷 সেভ হচ্ছে...";
+    btn.disabled = true;
+
+    html2canvas(routine).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'Exam_Routine_Bangla.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      btn.textContent = "✅ ডাউনলোড সম্পন্ন!";
+      setTimeout(() => {
+        btn.textContent = "⬇ ডাউনলোড";
+        btn.disabled = false;
+      }, 2000);
+    }).catch(() => {
+      alert("❌ ডাউনলোড ব্যর্থ হয়েছে!");
+      btn.textContent = "⬇ ডাউনলোড";
+      btn.disabled = false;
+    });
+  }
+</script>
+
+</body>
+</html>
