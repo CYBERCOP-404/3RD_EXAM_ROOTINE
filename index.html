@@ -24,14 +24,14 @@
 
     .routine-box {
       background: #ffffff;
-      padding: 30px 20px 60px;
+      padding: 30px 20px 20px;
       border-radius: 16px;
       box-shadow: 0 0 15px rgba(0,0,0,0.15);
       width: 100%;
       max-width: 1100px;
-      position: relative;
       overflow-x: auto;
       transition: all 0.3s ease-in-out;
+      position: relative;
     }
 
     h1 {
@@ -97,13 +97,14 @@
       transform: scale(1.05);
     }
 
-    footer {
+    .footer {
+      text-align: center;
       margin-top: 20px;
       font-size: 16px;
       color: #333;
     }
 
-    footer a {
+    .footer a {
       text-decoration: none;
       color: #00796b;
     }
@@ -124,7 +125,7 @@
         right: 15px;
       }
 
-      footer {
+      .footer {
         font-size: 14px;
       }
     }
@@ -134,6 +135,7 @@
 
 <div id="routine" class="routine-box">
   <button class="download-btn" id="downloadBtn" onclick="downloadRoutine()">⬇ ডাউনলোড</button>
+
   <h1>📘 পরীক্ষার রুটিন</h1>
   <table>
     <thead>
@@ -155,18 +157,20 @@
       <tr class="highlight-afternoon"><td>০৭-০৮-২৫</td><td>Thursday</td><td>২:০০ PM</td><td>সোশ্যাল সায়েন্স</td></tr>
     </tbody>
   </table>
-</div>
 
-<footer>
-  © 2025 Developer: <a href="https://cybercop-404.github.io/" target="_blank">MD. NAHIDUL ISLAM</a>
-</footer>
+  <div class="footer">
+    © 2025 Developer: <a href="https://cybercop-404.github.io/" target="_blank">MD. NAHIDUL ISLAM</a>
+  </div>
+</div>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
   function downloadRoutine() {
     const routine = document.getElementById('routine');
     const btn = document.getElementById('downloadBtn');
-    btn.style.display = 'none'; // Hide button
+
+    // Hide the download button temporarily
+    btn.style.display = 'none';
 
     html2canvas(routine).then(canvas => {
       const link = document.createElement('a');
@@ -174,9 +178,11 @@
       link.href = canvas.toDataURL('image/png');
       link.click();
 
-      btn.style.display = 'block'; // Show again
+      // Show the button again after capture
+      btn.style.display = 'block';
       btn.textContent = "✅ ডাউনলোড সম্পন্ন!";
       btn.disabled = true;
+
       setTimeout(() => {
         btn.textContent = "⬇ ডাউনলোড";
         btn.disabled = false;
