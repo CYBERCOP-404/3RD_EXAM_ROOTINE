@@ -97,13 +97,6 @@
       transform: scale(1.05);
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 16px;
-      color: #333;
-    }
-
     .footer a {
       text-decoration: none;
       color: #00796b;
@@ -124,16 +117,13 @@
         top: 15px;
         right: 15px;
       }
-
-      .footer {
-        font-size: 14px;
-      }
     }
   </style>
 </head>
 <body>
 
 <div id="routine" class="routine-box">
+  <!-- ডাউনলোড বাটন কেবল ওয়েব ব্রাউজারে দেখা যাবে -->
   <button class="download-btn" id="downloadBtn" onclick="downloadRoutine()">⬇ ডাউনলোড</button>
 
   <h1>📘 পরীক্ষার রুটিন</h1>
@@ -155,12 +145,12 @@
       <tr class="highlight-afternoon"><td>২৩-০৭-২৫</td><td>Wednesday</td><td>২:০০ PM</td><td>গণিত‑২</td></tr>
       <tr class="highlight-morning"><td>২৪-০৭-২৫</td><td>Thursday</td><td>১০:০০ AM</td><td>আইটি সাপোর্ট সার্ভিসেস</td></tr>
       <tr class="highlight-afternoon"><td>০৭-০৮-২৫</td><td>Thursday</td><td>২:০০ PM</td><td>সোশ্যাল সায়েন্স</td></tr>
+      <!-- Footer Row -->
+      <tr>
+        <td colspan="4" class="footer">© 2025 Developer: <a href="https://cybercop-404.github.io/" target="_blank">MD. NAHIDUL ISLAM</a></td>
+      </tr>
     </tbody>
   </table>
-
-  <div class="footer">
-    © 2025 Developer: <a href="https://cybercop-404.github.io/" target="_blank">MD. NAHIDUL ISLAM</a>
-  </div>
 </div>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -169,7 +159,7 @@
     const routine = document.getElementById('routine');
     const btn = document.getElementById('downloadBtn');
 
-    // Hide the download button temporarily
+    // Hide the download button before capture
     btn.style.display = 'none';
 
     html2canvas(routine).then(canvas => {
@@ -178,7 +168,7 @@
       link.href = canvas.toDataURL('image/png');
       link.click();
 
-      // Show the button again after capture
+      // Restore the download button
       btn.style.display = 'block';
       btn.textContent = "✅ ডাউনলোড সম্পন্ন!";
       btn.disabled = true;
