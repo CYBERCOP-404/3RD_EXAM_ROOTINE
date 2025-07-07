@@ -17,13 +17,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       min-height: 100vh;
       padding: 20px;
     }
 
     .routine-box {
       background: #ffffff;
-      padding: 30px 20px;
+      padding: 30px 20px 60px;
       border-radius: 16px;
       box-shadow: 0 0 15px rgba(0,0,0,0.15);
       width: 100%;
@@ -44,7 +45,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 18px;
-      min-width: 600px;
+      min-width: 700px;
     }
 
     th, td {
@@ -66,17 +67,16 @@
       background-color: #e3f2fd;
     }
 
-    .highlight-10am td:nth-child(2) {
+    .highlight-morning td:nth-child(3) {
       background-color: #c8e6c9 !important;
       font-weight: bold;
     }
 
-    .highlight-2pm td:nth-child(2) {
+    .highlight-afternoon td:nth-child(3) {
       background-color: #b8e2a7 !important;
       font-weight: bold;
     }
 
-    /* Download Button */
     .download-btn {
       position: absolute;
       top: 20px;
@@ -97,6 +97,17 @@
       transform: scale(1.05);
     }
 
+    footer {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: #00796b;
+    }
+
     @media (max-width: 768px) {
       table {
         font-size: 14px;
@@ -112,42 +123,50 @@
         top: 15px;
         right: 15px;
       }
+
+      footer {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
 <div id="routine" class="routine-box">
-  <button class="download-btn" onclick="downloadRoutine()">⬇ ডাউনলোড</button>
+  <button class="download-btn" id="downloadBtn" onclick="downloadRoutine()">⬇ ডাউনলোড</button>
   <h1>📘 পরীক্ষার রুটিন</h1>
   <table>
     <thead>
       <tr>
         <th>তারিখ</th>
+        <th>বার</th>
         <th>সময়</th>
         <th>বিষয়</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="highlight-10am"><td>১০-০৭-২৫</td><td>১০:০০ AM</td><td>ডিজিটাল ইলেকট্রনিক্স ১</td></tr>
-      <tr class="highlight-2pm"><td>১৩-০৭-২৫</td><td>২:০০ PM</td><td>ফিজিক্স‑২</td></tr>
-      <tr class="highlight-10am"><td>১৫-০৭-২৫</td><td>১০:০০ AM</td><td>পাইথন‑২</td></tr>
-      <tr class="highlight-2pm"><td>১৯-০৭-২৫</td><td>২:০০ PM</td><td>বেসিক ইলেকট্রনিক্স</td></tr>
-      <tr class="highlight-10am"><td>২১-০৭-২৫</td><td>১০:০০ AM</td><td>গণিত‑৩</td></tr>
-      <tr class="highlight-2pm"><td>২৩-০৭-২৫</td><td>২:০০ PM</td><td>গণিত‑২</td></tr>
-      <tr class="highlight-10am"><td>২৪-০৭-২৫</td><td>১০:০০ AM</td><td>আইটি সাপোর্ট সার্ভিসেস</td></tr>
-      <tr class="highlight-2pm"><td>০৭-০৮-২৫</td><td>২:০০ PM</td><td>সোশ্যাল সায়েন্স</td></tr>
+      <tr class="highlight-morning"><td>১০-০৭-২৫</td><td>Thursday</td><td>১০:০০ AM</td><td>ডিজিটাল ইলেকট্রনিক্স ১</td></tr>
+      <tr class="highlight-afternoon"><td>১৩-০৭-২৫</td><td>Sunday</td><td>২:০০ PM</td><td>ফিজিক্স‑২</td></tr>
+      <tr class="highlight-morning"><td>১৫-০৭-২৫</td><td>Tuesday</td><td>১০:০০ AM</td><td>পাইথন‑২</td></tr>
+      <tr class="highlight-afternoon"><td>১৯-০৭-২৫</td><td>Saturday</td><td>২:০০ PM</td><td>বেসিক ইলেকট্রনিক্স</td></tr>
+      <tr class="highlight-morning"><td>২১-০৭-২৫</td><td>Monday</td><td>১০:০০ AM</td><td>গণিত‑৩</td></tr>
+      <tr class="highlight-afternoon"><td>২৩-০৭-২৫</td><td>Wednesday</td><td>২:০০ PM</td><td>গণিত‑২</td></tr>
+      <tr class="highlight-morning"><td>২৪-০৭-২৫</td><td>Thursday</td><td>১০:০০ AM</td><td>আইটি সাপোর্ট সার্ভিসেস</td></tr>
+      <tr class="highlight-afternoon"><td>০৭-০৮-২৫</td><td>Thursday</td><td>২:০০ PM</td><td>সোশ্যাল সায়েন্স</td></tr>
     </tbody>
   </table>
 </div>
+
+<footer>
+  © 2025 Developer: <a href="https://cybercop-404.github.io/" target="_blank">MD. NAHIDUL ISLAM</a>
+</footer>
 
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
   function downloadRoutine() {
     const routine = document.getElementById('routine');
-    const btn = document.querySelector('.download-btn');
-    btn.textContent = "📷 সেভ হচ্ছে...";
-    btn.disabled = true;
+    const btn = document.getElementById('downloadBtn');
+    btn.style.display = 'none'; // Hide button
 
     html2canvas(routine).then(canvas => {
       const link = document.createElement('a');
@@ -155,13 +174,16 @@
       link.href = canvas.toDataURL('image/png');
       link.click();
 
+      btn.style.display = 'block'; // Show again
       btn.textContent = "✅ ডাউনলোড সম্পন্ন!";
+      btn.disabled = true;
       setTimeout(() => {
         btn.textContent = "⬇ ডাউনলোড";
         btn.disabled = false;
       }, 2000);
     }).catch(() => {
       alert("❌ ডাউনলোড ব্যর্থ হয়েছে!");
+      btn.style.display = 'block';
       btn.textContent = "⬇ ডাউনলোড";
       btn.disabled = false;
     });
